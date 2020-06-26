@@ -46,7 +46,7 @@ function makePageForEpisodes(episodeList) {
         // The Image
         var episodeImg = document.createElement("img");
         episodeImg.src = episodeList[i].image.medium;
-        episodeImg.style.alignSelf = "center";
+        //episodeImg.style.alignSelf = "center";
         episodeImg.style.margin = "auto";
         episodeImg.style.display = "block";
         //episodeImg.style.width = "50%";
