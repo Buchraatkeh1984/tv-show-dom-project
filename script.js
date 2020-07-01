@@ -42,6 +42,12 @@ function fetchEpisodes(showId) {
             searchInput.style.display = "inline";
             pickEpisode.style.display = "inline";
             searchResult.style.display = "inline";
+            showSearchInput.style.display = "none";
+            showSearchResult.style.display = "none";
+            pickShow.style.display = "none";
+
+            searchResult.innerText =
+                "Displaying " + allEpisodes.length + "/73 episodes";
             makePageForEpisodes(allEpisodes);
             searchInput.addEventListener("keyup", liveSearch);
             makeInputForEpisodes(allEpisodes);
@@ -54,7 +60,9 @@ function fetchEpisodes(showId) {
 
 function makePageForShows(showList) {
     rootElem.innerHTML = "";
-
+    showSearchInput.style.display = "inline";
+    showSearchResult.style.display = "inline";
+    pickShow.style.display = "inline";
     //hiding search episodes input
     searchInput.style.display = "none";
     pickEpisode.style.display = "none";
@@ -199,6 +207,8 @@ function sortlist(selectElem) {
 
 //episodes
 function makePageForEpisodes(episodeList) {
+    rootElem.innerHTML = "";
+
     // navigation link to go back to the shows list
     returnBut.style.display = "inline";
     returnBut.addEventListener("click", function() {
@@ -254,6 +264,8 @@ function liveSearch() {
             episode.name.toLowerCase().includes(searchString)
         );
     });
+    makeInputForEpisodes(filteredEpisodes);
+    makePageForEpisodes(filteredEpisodes);
     return (searchResult.innerText =
         "Displaying " + filteredEpisodes.length + "/73 episodes");
 
@@ -279,6 +291,11 @@ function liveSearch() {
 //shows search
 
 function makeInputForEpisodes(episodeList) {
+    var length = pickEpisode.options.length;
+    for (i = length - 1; i >= 0; i--) {
+        //pickShow.options[i] = null;
+        pickEpisode.remove(i);
+    }
     episodeList.map((episode) => {
         const episodeInput = document.createElement("option");
         episodeInput.innerText =
