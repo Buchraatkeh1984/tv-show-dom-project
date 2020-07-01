@@ -10,30 +10,69 @@ body {
 }
 
 #searchInput {
-    margin: 20px;
+    margin: 5px;
     width: 200px;
     height: 38px;
 }
 
+#showSearchInput {
+    margin: 5px;
+    width: 200px;
+    height: 38px;
+}
+
+#searchResult {
+    margin: 5px;
+    font-size: "16";
+    color: rgb(7, 7, 87);
+}
+
+#showSearchResult {
+    margin: 5px;
+    font-size: 20px;
+    color: rgb(7, 7, 87);
+}
+
 #select-episode {
+    margin: 5px;
     box-sizing: border-box;
     font-size: 16px;
-    padding: 14px 20px 12px 45px;
+    padding: 14px 20px 12px 10px;
     border: none;
     border-bottom: 1px solid #ddd;
 }
 
+#select-show {
+    margin: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    padding: 14px 20px 12px 10px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+#returnBut {
+    margin: 5px;
+    font-size: "16";
+    height: 38px;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: aliceblue;
+    border: 1px solid rgb(199, 200, 235);
+    border-radius: 5px;
+}
+
 #select-episode:focus {
-    outline: 3px solid #ddd;
+    outline: 3px solid rgb(236, 232, 232);
 }
 
 #select-episode option {
-    color: black;
+    color: antiquewhite;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
 #select-episode option:hover {
-    background-color: #f1f1f1;
+    background-color: lightgray;
 }

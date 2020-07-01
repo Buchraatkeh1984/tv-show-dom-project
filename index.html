@@ -10,18 +10,22 @@
 </head>
 
 <body>
-    <div>
-        <select id="select-episode" placeholder="Pick an episode..." type="text">
+    <div id="navigationBar">
+        <input id="showSearchInput" type="text" />
+        <label id="showSearchResult">found 301 shows</label>
+        <select id="select-show" placeholder="Pick a show..."> </select>
+        <select id="select-episode" placeholder="Pick an episode...">
         <option>Pick an episode... </option>
       </select>
         <input id="searchInput" type="text" />
         <label id="searchResult">Displaying 73/73 episodes </label>
+        <button id="returnBut">Go back to shows list</button>
     </div>
     <div id="root"></div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
-
+    <script src="shows.js"></script>
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
 </body>
