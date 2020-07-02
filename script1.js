@@ -46,12 +46,12 @@ function makePageForEpisodes(episodeList) {
     for (let i = 0; i < episodeList.length; i++) {
         //The episode card
         var episodeElm = document.createElement("div");
-        episodeElm.style.backgroundColor = "white";
-        episodeElm.style.maxWidth = "280px";
-        episodeElm.style.border = "2px solid white ";
-        episodeElm.style.borderRadius = "10px";
-        episodeElm.style.margin = "10px";
-        episodeElm.style.marginTop = "0px";
+        // episodeElm.style.backgroundColor = "white";
+        // episodeElm.style.maxWidth = "280px";
+        // episodeElm.style.border = "2px solid white ";
+        // episodeElm.style.borderRadius = "10px";
+        // episodeElm.style.margin = "10px";
+        // episodeElm.style.marginTop = "0px";
         rootElem.appendChild(episodeElm);
         //The Name
         var episodeName = document.createElement("h3");
@@ -59,18 +59,18 @@ function makePageForEpisodes(episodeList) {
             episodeList[i].name +
             "-" +
             formatEpisode(episodeList[i].season, episodeList[i].number);
-        episodeName.style.border = "2px solid black";
-        episodeName.style.borderRadius = "10px";
-        episodeName.style.padding = "20px";
-        episodeName.style.textAlign = "center";
-        episodeName.style.marginTop = "0px";
+        // episodeName.style.border = "2px solid black";
+        // episodeName.style.borderRadius = "10px";
+        // episodeName.style.padding = "20px";
+        // episodeName.style.textAlign = "center";
+        // episodeName.style.marginTop = "0px";
         episodeElm.appendChild(episodeName);
         // The Image
         var episodeImg = document.createElement("img");
         if (episodeList[i].image != null) {
             episodeImg.src = episodeList[i].image.medium;
-            episodeImg.style.margin = "auto";
-            episodeImg.style.display = "block";
+            // episodeImg.style.margin = "auto";
+            // episodeImg.style.display = "block";
             episodeElm.appendChild(episodeImg);
         }
         //The Episode Summary
@@ -179,3 +179,177 @@ function sortlist(selectElem) {
     }
 }
 window.onload = setup;
+// body {
+//     background - color: rgb(224, 221, 221);
+// }
+
+// #
+// root {
+//     display: flex;
+//     flex - direction: row;
+//     flex - wrap: wrap;
+//     padding: 20 px;
+// }
+
+// #
+// searchInput {
+//     margin: 5 px;
+//     width: 200 px;
+//     height: 38 px;
+// }
+
+// #
+// showSearchInput {
+//     margin: 5 px;
+//     width: 200 px;
+//     height: 38 px;
+// }
+
+// #
+// searchResult {
+//     margin: 5 px;
+//     font - size: "16";
+//     color: rgb(7, 7, 87);
+// }
+
+// #
+// showSearchResult {
+//     margin: 5 px;
+//     font - size: 20 px;
+//     color: rgb(7, 7, 87);
+// }
+
+// #
+// select - episode {
+//     margin: 5 px;
+//     box - sizing: border - box;
+//     font - size: 16 px;
+//     padding: 14 px 20 px 12 px 10 px;
+//     border: none;
+//     border - bottom: 1 px solid# ddd;
+// }
+
+// #
+// select - show {
+//     margin: 5 px;
+//     box - sizing: border - box;
+//     font - size: 16 px;
+//     padding: 14 px 20 px 12 px 10 px;
+//     border: none;
+//     border - bottom: 1 px solid# ddd;
+// }
+
+// #
+// returnBut {
+//     margin: 5 px;
+//     font - size: "16";
+//     height: 38 px;
+//     font - weight: bold;
+//     font - size: 16 px;
+//     background - color: aliceblue;
+//     border: 1 px solid rgb(199, 200, 235);
+//     border - radius: 5 px;
+// }
+
+// #
+// select - episode: focus {
+//     outline: 3 px solid rgb(236, 232, 232);
+// }
+
+// #
+// select - episode option {
+//     color: antiquewhite;
+//     padding: 12 px 16 px;
+//     text - decoration: none;
+//     display: block;
+// }
+
+// #
+// select - episode option: hover {
+//     background - color: lightgray;
+// }
+
+// .title - box {
+//     background - color: rgb(250, 250, 252);
+//     width: "100%";
+//     border - radius: 10 px;
+//     margin: 5 px;
+//     display: flex;
+//     flex - direction: column;
+//     /* and so forth */
+// }
+
+// .name - box {
+//     border - radius: 10 px;
+//     padding: 10 px;
+//     margin: 5 px;
+// }
+
+// .show - box {
+//     border - radius: 10 px;
+//     margin: 10 px;
+//     display: flex;
+//     flex - direction: row;
+// }
+
+// img {
+//     margin: 10 px;
+// }
+
+// .summary - box {
+//     padding: 10 px;
+//     font - size: 18 px;
+//     width: 60 % ;
+// }
+
+// .information - box {
+//     background - color: rgb(255, 255, 252);
+//     width: 25 % ;
+//     border - radius: 10 px;
+//     margin: 5 px;
+//     padding: 10 px;
+//     font - size: 20 px;
+//     display: flex;
+//     flex - direction: column;
+// }
+
+// .episode - box {
+//     /* episodeElm.style.backgroundColor="white";
+//     episodeElm.style.maxWidth="280px";
+//     episodeElm.style.border="2px solid white ";
+//     episodeElm.style.borderRadius="10px";
+//     episodeElm.style.margin="10px";
+//     episodeElm.style.marginTop="0px"; */
+//     background - color: white;
+//     max - width: 280 px;
+//     border: 2 px solid white;
+//     border - radius: 10 px;
+//     margin: 10 px;
+//     margin - top: 0 px;
+// }
+
+// .episode - name - box {
+//     /* episodeName.style.border="2px solid black";
+//     episodeName.style.borderRadius="10px";
+//     episodeName.style.padding="20px";
+//     episodeName.style.textAlign="center";
+//     episodeName.style.marginTop="0px"; */
+//     border: 2 px solid black;
+//     border - radius: 10 px;
+//     padding: 20 px;
+//     text - align: center;
+//     margin - top: 0 px;
+// }
+
+// .episode - img - box {
+//     margin: auto;
+//     display: block;
+// }
+
+// button {
+//     width: 150;
+//     height: 38 px;
+//     font - size: 16 px;
+//     font - weight: bold;
+//     background - color: aliceblue;
+// }

@@ -76,3 +76,88 @@ body {
 #select-episode option:hover {
     background-color: lightgray;
 }
+
+.title-box {
+    background-color: rgb(250, 250, 252);
+    width: "100%";
+    border-radius: 10px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    /* and so forth */
+}
+
+.name-box {
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.show-box {
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+img {
+    margin: 10px;
+}
+
+.summary-box {
+    padding: 10px;
+    font-size: 18px;
+    width: 60%;
+}
+
+.information-box {
+    background-color: rgb(255, 255, 252);
+    width: 25%;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 10px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.episode-box {
+    /* episodeElm.style.backgroundColor="white";
+    episodeElm.style.maxWidth="280px";
+    episodeElm.style.border="2px solid white ";
+    episodeElm.style.borderRadius="10px";
+    episodeElm.style.margin="10px";
+    episodeElm.style.marginTop="0px"; */
+    background-color: white;
+    max-width: 280px;
+    border: 2px solid white;
+    border-radius: 10px;
+    margin: 10px;
+    margin-top: 0px;
+}
+
+.episode-name-box {
+    /* episodeName.style.border="2px solid black";
+    episodeName.style.borderRadius="10px";
+    episodeName.style.padding="20px";
+    episodeName.style.textAlign="center";
+    episodeName.style.marginTop="0px"; */
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 0px;
+}
+
+.episode-img-box {
+    margin: auto;
+    display: block;
+}
+
+button {
+    width: 150;
+    height: 38px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: aliceblue;
+}

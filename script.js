@@ -7,9 +7,8 @@ var searchResult = document.getElementById("searchResult");
 var returnBut = document.getElementById("returnBut");
 var showSearchInput = document.getElementById("showSearchInput");
 var showSearchResult = document.getElementById("showSearchResult");
-
 const rootElem = document.getElementById("root");
-var show_Id = 167;
+var show_Id;
 var allEpisodes = [];
 var allShows = [];
 
@@ -20,8 +19,8 @@ function formatEpisode(season, number) {
 }
 
 function setup() {
-    show_Id = 167;
     allShows = getAllShows();
+    showSearchResult.innerText = "found " + allShows.length + " shows";
     returnBut.style.display = "none";
     makeInputForShows(allShows);
     makePageForShows(allShows);
@@ -35,6 +34,8 @@ function fetchEpisodes(showId) {
             return response.json();
         })
         .then((data) => {
+            searchInput.value = "";
+            show_Id = showId;
             console.log(data);
             allEpisodes = data;
             rootElem.innerHTML = "";
@@ -47,7 +48,7 @@ function fetchEpisodes(showId) {
             pickShow.style.display = "none";
 
             searchResult.innerText =
-                "Displaying " + allEpisodes.length + "/73 episodes";
+                "Displaying " + allEpisodes.length + " / " + allEpisodes.length;
             makePageForEpisodes(allEpisodes);
             searchInput.addEventListener("keyup", liveSearch);
             makeInputForEpisodes(allEpisodes);
@@ -72,29 +73,20 @@ function makePageForShows(showList) {
     for (let i = 0; i < showList.length; i++) {
         //The show card
         var showTitleElm = document.createElement("div");
-        showTitleElm.style.backgroundColor = "rgb(250, 250, 252)";
-        showTitleElm.style.width = "100%";
-        showTitleElm.style.borderRadius = "10px";
-        showTitleElm.style.margin = "5px";
-        showTitleElm.style.display = "flex";
-        showTitleElm.style.flexDirection = "column";
+        showTitleElm.classList.add("title-box");
         rootElem.appendChild(showTitleElm);
         //The Name
         var showName = document.createElement("h1");
         showName.innerHTML = "<a href=# >" + showList[i].name + "</a>";
-        showName.style.borderRadius = "10px";
-        showName.style.padding = "10px";
-        showName.style.margin = "5px";
+        showName.classList.add("name-box");
         showTitleElm.appendChild(showName);
+        //show_Id = showList[i].id;
         showName.addEventListener("click", function() {
             fetchEpisodes(showList[i].id);
         });
         //another container for the rest of the element
         var showElm = document.createElement("div");
-        showElm.style.borderRadius = "10px";
-        showElm.style.margin = "10px";
-        showElm.style.display = "flex";
-        showElm.style.flexDirection = "row";
+        showElm.classList.add("show-box");
         showTitleElm.appendChild(showElm);
         //The image
         var showImg = document.createElement("img");
@@ -105,22 +97,13 @@ function makePageForShows(showList) {
         }
         //The show Summary
         var showSummary = document.createElement("div");
+        showSummary.classList.add("summary-box");
         showSummary.innerHTML = showList[i].summary;
-        showSummary.style.padding = "10px";
-        showSummary.style.fontSize = "18px";
-        showSummary.style.width = "60%";
         showElm.appendChild(showSummary);
 
         //Rate ,Genere,Status,Runtime
         var informationElm = document.createElement("div");
-        informationElm.style.backgroundColor = "rgb(255, 255, 252)";
-        informationElm.style.width = "25%";
-        informationElm.style.borderRadius = "10px";
-        informationElm.style.margin = "5px";
-        informationElm.style.padding = "10px";
-        informationElm.style.fontSize = "20px";
-        informationElm.style.display = "flex";
-        informationElm.style.flexDirection = "column";
+        informationElm.classList.add("information-box");
         showElm.appendChild(informationElm);
 
         var rateElm = document.createElement("P");
@@ -163,7 +146,7 @@ function liveShowSearch() {
 
 function makeInputForShows(showList) {
     var length = pickShow.options.length;
-    for (i = length - 1; i >= 0; i--) {
+    for (i = length - 1; i >= 1; i--) {
         //pickShow.options[i] = null;
         pickShow.remove(i);
     }
@@ -220,31 +203,21 @@ function makePageForEpisodes(episodeList) {
     for (let i = 0; i < episodeList.length; i++) {
         //The episode card
         var episodeElm = document.createElement("div");
-        episodeElm.style.backgroundColor = "white";
-        episodeElm.style.maxWidth = "280px";
-        episodeElm.style.border = "2px solid white ";
-        episodeElm.style.borderRadius = "10px";
-        episodeElm.style.margin = "10px";
-        episodeElm.style.marginTop = "0px";
+        episodeElm.classList.add("episode-box");
         rootElem.appendChild(episodeElm);
         //The Name
         var episodeName = document.createElement("h3");
+        episodeName.classList.add("episode-name-box");
         episodeName.innerText =
             episodeList[i].name +
             "-" +
             formatEpisode(episodeList[i].season, episodeList[i].number);
-        episodeName.style.border = "2px solid black";
-        episodeName.style.borderRadius = "10px";
-        episodeName.style.padding = "20px";
-        episodeName.style.textAlign = "center";
-        episodeName.style.marginTop = "0px";
         episodeElm.appendChild(episodeName);
         // The Image
         var episodeImg = document.createElement("img");
         if (episodeList[i].image != null) {
             episodeImg.src = episodeList[i].image.medium;
-            episodeImg.style.margin = "auto";
-            episodeImg.style.display = "inline";
+            episodeImg.classList.add("episode-img-box");
             episodeElm.appendChild(episodeImg);
         }
         //The Episode Summary
@@ -267,7 +240,7 @@ function liveSearch() {
     makeInputForEpisodes(filteredEpisodes);
     makePageForEpisodes(filteredEpisodes);
     return (searchResult.innerText =
-        "Displaying " + filteredEpisodes.length + "/73 episodes");
+        "Displaying " + filteredEpisodes.length + "/ " + allEpisodes.length);
 
     // another way to solve the live search
 
@@ -292,7 +265,7 @@ function liveSearch() {
 
 function makeInputForEpisodes(episodeList) {
     var length = pickEpisode.options.length;
-    for (i = length - 1; i >= 0; i--) {
+    for (i = length - 1; i >= 1; i--) {
         //pickShow.options[i] = null;
         pickEpisode.remove(i);
     }
