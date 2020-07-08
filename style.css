@@ -13,12 +13,14 @@ body {
     margin: 5px;
     width: 200px;
     height: 38px;
+    border: 2px solid rgb(55, 73, 233);
 }
 
 #showSearchInput {
     margin: 5px;
     width: 200px;
     height: 38px;
+    border: 2px solid rgb(55, 73, 233);
 }
 
 #searchResult {
@@ -38,8 +40,7 @@ body {
     box-sizing: border-box;
     font-size: 16px;
     padding: 14px 20px 12px 10px;
-    border: none;
-    border-bottom: 1px solid #ddd;
+    border: 2px solid rgb(55, 73, 233);
 }
 
 #select-show {
@@ -47,8 +48,7 @@ body {
     box-sizing: border-box;
     font-size: 16px;
     padding: 14px 20px 12px 10px;
-    border: none;
-    border-bottom: 1px solid #ddd;
+    border: 2px solid rgb(55, 73, 233);
 }
 
 #returnBut {
@@ -179,4 +179,12 @@ footer {
 
 #show-more-button {
     display: inline;
+}
+
+#sort-shows {
+    margin: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    padding: 14px 20px 12px 10px;
+    border: 2px solid rgb(55, 73, 233);
 }
