@@ -106,7 +106,14 @@ img {
 
 .summary-box {
     padding: 10px;
-    font-size: 18px;
+    font-size: 20px;
+    width: 80%;
+}
+
+.cast-summary-box {
+    padding: 10px;
+    font-size: 20px;
+    color: blue;
     width: 80%;
 }
 
@@ -160,4 +167,16 @@ button {
     font-size: 16px;
     font-weight: bold;
     background-color: aliceblue;
+}
+
+footer {
+    text-align: center;
+}
+
+.longText {
+    display: none;
+}
+
+#show-more-button {
+    display: inline;
 }
