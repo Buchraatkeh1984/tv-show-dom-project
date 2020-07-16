@@ -129,12 +129,6 @@ img {
 }
 
 .episode-box {
-    /* episodeElm.style.backgroundColor="white";
-    episodeElm.style.maxWidth="280px";
-    episodeElm.style.border="2px solid white ";
-    episodeElm.style.borderRadius="10px";
-    episodeElm.style.margin="10px";
-    episodeElm.style.marginTop="0px"; */
     background-color: white;
     max-width: 280px;
     border: 2px solid white;
@@ -144,11 +138,6 @@ img {
 }
 
 .episode-name-box {
-    /* episodeName.style.border="2px solid black";
-    episodeName.style.borderRadius="10px";
-    episodeName.style.padding="20px";
-    episodeName.style.textAlign="center";
-    episodeName.style.marginTop="0px"; */
     border: 2px solid black;
     border-radius: 10px;
     padding: 20px;
@@ -157,6 +146,28 @@ img {
 }
 
 .episode-img-box {
+    margin: auto;
+    display: block;
+}
+
+.season-box {
+    background-color: white;
+    max-width: 280px;
+    border: 2px solid blue;
+    border-radius: 10px;
+    margin: 10px;
+    margin-top: 0px;
+}
+
+.season-name-box {
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 0px;
+}
+
+.season-img-box {
     margin: auto;
     display: block;
 }
@@ -187,4 +198,8 @@ footer {
     font-size: 16px;
     padding: 14px 20px 12px 10px;
     border: 2px solid rgb(55, 73, 233);
+}
+
+.moreItem {
+    display: inline;
 }

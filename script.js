@@ -9,9 +9,11 @@ var showSearchInput = document.getElementById("showSearchInput");
 var showSearchResult = document.getElementById("showSearchResult");
 const rootElem = document.getElementById("root");
 var sortShows = document.getElementById("sort-shows");
+var sortShowsLabel = document.getElementById("showSort");
 var show_Id;
 var allEpisodes = [];
 var allShows = [];
+var allSeasons = [];
 
 returnBut.addEventListener("click", function() {
     rootElem.innerHTML = "";
@@ -41,7 +43,9 @@ function setup() {
     });
 }
 
-function fetchEpisodes(showId) {
+function fetchEpisodes(showId, seasonNo) {
+    console.log(seasonNo);
+
     fetch("https://api.tvmaze.com/shows/" + showId + "/episodes")
         .then((response) => {
             return response.json();
@@ -53,20 +57,65 @@ function fetchEpisodes(showId) {
             allEpisodes = data;
             rootElem.innerHTML = "";
             pickEpisode.selectedIndex = 0;
-            searchInput.style.display = "inline";
-            pickEpisode.style.display = "inline";
-            searchResult.style.display = "inline";
+            if (seasonNo === 0) {
+                searchInput.style.display = "inline";
+                pickEpisode.style.display = "inline";
+                searchResult.style.display = "inline";
+                showSearchInput.style.display = "none";
+                showSearchResult.style.display = "none";
+                pickShow.style.display = "none";
+                sortShows.style.display = "none";
+                sortShowsLabel.style.display = "none";
+
+                searchResult.innerText =
+                    "Displaying " + allEpisodes.length + " / " + allEpisodes.length;
+            } else {
+                searchInput.style.display = "none";
+                pickEpisode.style.display = "none";
+                searchResult.style.display = "none";
+                showSearchInput.style.display = "none";
+                showSearchResult.style.display = "none";
+                pickShow.style.display = "none";
+                sortShows.style.display = "none";
+                sortShowsLabel.style.display = "none";
+            }
+            makePageForEpisodes(allEpisodes, seasonNo);
+            searchInput.addEventListener("keyup", liveSearch);
+            makeInputForEpisodes(allEpisodes);
+            pickEpisode.addEventListener("change", pickAnEpisod);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+function fetchSeason(showId) {
+    fetch("https://api.tvmaze.com/shows/" + showId + "/seasons")
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            searchInput.value = "";
+            show_Id = showId;
+            console.log(data);
+            allSeasons = data;
+            rootElem.innerHTML = "";
+            pickEpisode.selectedIndex = 0;
+            searchInput.style.display = "none";
+            pickEpisode.style.display = "none";
+            searchResult.style.display = "none";
             showSearchInput.style.display = "none";
             showSearchResult.style.display = "none";
             pickShow.style.display = "none";
             sortShows.style.display = "none";
+            sortShowsLabel.style.display = "none";
 
-            searchResult.innerText =
-                "Displaying " + allEpisodes.length + " / " + allEpisodes.length;
-            makePageForEpisodes(allEpisodes);
-            searchInput.addEventListener("keyup", liveSearch);
-            makeInputForEpisodes(allEpisodes);
-            pickEpisode.addEventListener("change", pickAnEpisod);
+            // searchResult.innerText =
+            //     "Displaying " + allEpisodes.length + " / " + allEpisodes.length;
+            makePageForSeasons(allSeasons, showId);
+            // searchInput.addEventListener("keyup", liveSearch);
+            // makeInputForEpisodes(allEpisodes);
+            // pickEpisode.addEventListener("change", pickAnEpisod);
         })
         .catch((error) => {
             console.log(error);
@@ -120,6 +169,8 @@ function makePageForCast(showCast) {
     searchInput.style.display = "none";
     pickEpisode.style.display = "none";
     searchResult.style.display = "none";
+    sortShows.style.display = "none";
+    sortShowsLabel.style.display = "none";
 
     var genre = "";
     for (let i = 0; i < showCast._embedded.cast.length; i++) {
@@ -201,6 +252,8 @@ function makePageForShows(showList1, sortedBy) {
     searchInput.style.display = "none";
     pickEpisode.style.display = "none";
     searchResult.style.display = "none";
+    sortShows.style.display = "inline";
+    sortShowsLabel.style.display = "inline";
 
     var genre = "";
     showList = sortshows(showList1, sortedBy);
@@ -218,7 +271,16 @@ function makePageForShows(showList1, sortedBy) {
         showTitleElm.appendChild(showName);
         //show_Id = showList[i].id;
         showName.addEventListener("click", function() {
-            fetchEpisodes(showList[i].id);
+            fetchEpisodes(showList[i].id, 0);
+        });
+
+        var fetchSeasonLink = document.createElement("h4");
+        fetchSeasonLink.innerHTML = "<a href=# >" + "Show all season" + "</a>";
+        fetchSeasonLink.classList.add("name-box");
+        showTitleElm.appendChild(fetchSeasonLink);
+        //show_Id = showList[i].id;
+        fetchSeasonLink.addEventListener("click", function() {
+            fetchSeason(showList[i].id);
         });
         //another container for the rest of the element
         var showElm = document.createElement("div");
@@ -238,7 +300,7 @@ function makePageForShows(showList1, sortedBy) {
         showElm.appendChild(showSummary);
 
         // Character limit after which "Read More" will be seen
-        var char_limit = 250;
+        var char_limit = 200;
         var long_Text = "longText" + i;
         var text_Dots = "textDots" + i;
         var more_button = "show-more-button" + i;
@@ -251,20 +313,20 @@ function makePageForShows(showList1, sortedBy) {
         } else {
             var more = true;
             showSummary.innerHTML =
-                '<div><span class="short-text">' +
+                '<span class="moreItem"><span class="short-text">' +
                 showList[i].summary.substr(0, char_limit) +
-                "</span><span id=" +
+                '</span><span id=' +
                 long_Text +
-                ">" +
+                '>' +
                 showList[i].summary.substr(
                     char_limit,
                     showList[i].summary.length - char_limit
                 ) +
-                "</span><span id=" +
+                '</span><span  id=' +
                 text_Dots +
-                ">...</span><button id=" +
+                '>...</span><button  id=  ' +
                 more_button +
-                ">See More</button></div>";
+                '>See More</button></span>';
 
             //console.log(showSummary.innerHTML);
 
@@ -368,7 +430,7 @@ function pickAShow() {
     );
 
     show_Id = thePickedShowObj.id;
-    fetchEpisodes(show_Id);
+    fetchEpisodes(show_Id, 0);
     pickEpisode.selectedIndex = 0;
 }
 
@@ -449,13 +511,20 @@ function sortshows(arrayOfObjects, factorOfSorting) {
     //return sortedArrayOfObjects;
 }
 //episodes
-function makePageForEpisodes(episodeList) {
+function makePageForEpisodes(episodeList, seasonNo) {
+    let seasonEpisodes = [];
     rootElem.innerHTML = "";
 
     // navigation link to go back to the shows list
     returnBut.style.display = "inline";
+    if (seasonNo === 0) {
+        seasonEpisodes = episodeList.map((episode) => episode);
+    } else
+        seasonEpisodes = episodeList.filter(
+            (episode) => episode.season === seasonNo
+        );
 
-    for (let i = 0; i < episodeList.length; i++) {
+    for (let i = 0; i < seasonEpisodes.length; i++) {
         //The episode card
         var episodeElm = document.createElement("div");
         episodeElm.classList.add("episode-box");
@@ -464,22 +533,57 @@ function makePageForEpisodes(episodeList) {
         var episodeName = document.createElement("h3");
         episodeName.classList.add("episode-name-box");
         episodeName.innerText =
-            episodeList[i].name +
+            seasonEpisodes[i].name +
             "-" +
-            formatEpisode(episodeList[i].season, episodeList[i].number);
+            formatEpisode(seasonEpisodes[i].season, seasonEpisodes[i].number);
         episodeElm.appendChild(episodeName);
         // The Image
         var episodeImg = document.createElement("img");
-        if (episodeList[i].image != null) {
-            episodeImg.src = episodeList[i].image.medium;
+        if (seasonEpisodes[i].image != null) {
+            episodeImg.src = seasonEpisodes[i].image.medium;
             episodeImg.classList.add("episode-img-box");
             episodeElm.appendChild(episodeImg);
         }
         //The Episode Summary
         var episodesummary = document.createElement("div");
-        episodesummary.innerHTML = episodeList[i].summary;
+        episodesummary.innerHTML = seasonEpisodes[i].summary;
         episodesummary.style.padding = "10px";
         episodeElm.appendChild(episodesummary);
+    }
+}
+
+function makePageForSeasons(seasonList, show_Id) {
+    rootElem.innerHTML = "";
+
+    // navigation link to go back to the shows list
+    returnBut.style.display = "inline";
+
+    for (let i = 0; i < seasonList.length; i++) {
+        //The episode card
+        var seasonElm = document.createElement("div");
+        seasonElm.classList.add("season-box");
+        rootElem.appendChild(seasonElm);
+        //The Name
+        var seasonName = document.createElement("h3");
+        seasonName.classList.add("season-name-box");
+        seasonName.innerHTML =
+            "<a href=# >" + "Season" + seasonList[i].number + "</a>";
+        seasonElm.appendChild(seasonName);
+        seasonName.addEventListener("click", function() {
+            fetchEpisodes(show_Id, seasonList[i].number);
+        });
+        // The Image
+        var seasonImg = document.createElement("img");
+        if (seasonList[i].image != null) {
+            seasonImg.src = seasonList[i].image.medium;
+            seasonImg.classList.add("episode-img-box");
+            seasonElm.appendChild(seasonImg);
+        }
+        //The Episode Summary
+        var seasonSummary = document.createElement("div");
+        seasonSummary.innerHTML = seasonList[i].summary;
+        seasonSummary.style.padding = "10px";
+        seasonElm.appendChild(seasonSummary);
     }
 }
 
@@ -494,7 +598,7 @@ function liveSearch() {
             );
     });
     makeInputForEpisodes(filteredEpisodes);
-    makePageForEpisodes(filteredEpisodes);
+    makePageForEpisodes(filteredEpisodes, 0);
     return (searchResult.innerText =
         "Displaying " + filteredEpisodes.length + "/ " + allEpisodes.length);
 
@@ -549,7 +653,7 @@ function pickAnEpisod() {
         theEpisode.push(
             allEpisodes.find((episode) => episode.name === thePickedEpisodName)
         );
-        makePageForEpisodes(theEpisode);
+        makePageForEpisodes(theEpisode, 0);
         const div = document.createElement("div");
         rootElem.appendChild(div);
         const returnBut1 = document.createElement("button");
@@ -563,10 +667,12 @@ function pickAnEpisod() {
         returnBut1.addEventListener("click", function() {
             searchInput.style.display = "inline";
             searchResult.style.display = "inline";
-
-            fetchEpisodes(show_Id);
+            fetchEpisodes(show_Id, 0);
+            //event.preventDefault();
+            //history.go(-1)
+            // window.history.back();
         });
-    } else makePageForEpisodes(allEpisodes);
+    } else makePageForEpisodes(allEpisodes, 0);
 }
 
 // select a show
