@@ -1,21 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | My Name (My GitHub username)</title>
+    <title>TV Show Project | Buchra Atkeh Buchraatkeh1984</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  </head>
+</head>
 
-  <body>
-    <div id="root">
+<body>
+    <div id="navigationBar">
+        <input id="showSearchInput" type="text" placeholder="search for  shows" />
+        <label id="showSearchResult"></label>
+        <select id="select-show" placeholder="Pick a show..."> 
+          <option>..Pick a show... </option>
+        </select>
+        <label id="showSort"> Sort the shows by:</label>
+        <select id="sort-shows">
+          <option>Name </option>
+          <option>Rate </option>
+        </select>
+        <select id="select-episode" placeholder="Pick an episode...">
+        <option>Pick an episode... </option>
+      </select>
+        <input id="searchInput" type="text" placeholder="search for episodes" />
+        <label id="searchResult"> </label>
+        <button id="returnBut">Go back to shows list</button>
     </div>
+    <div id="root"></div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
-
+    <script src="shows.js"></script>
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
+
+    <footer>
+        the data has (originally) come from
+        <a href="https://www.tvmaze.com/">
+            <cite>TVMaze.com</a></cite>
+    </footer>
+
+    <footer>
+        <hr />
+        <p>
+            Written and coded by
+            <a href="https://github.com/Buchraatkeh1984" target="_blank">Buchra Atkeh</a
+        >.
+      </p>
+    </footer>
   </body>
 </html>
